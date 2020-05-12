@@ -1,3 +1,9 @@
+class UserRepository {
+  constructor () {
+    
+  }
+}
+
 if (typeof module !== 'undefined') {
-    module.exports = userRepository;
+    module.exports = UserRepository;
   }
