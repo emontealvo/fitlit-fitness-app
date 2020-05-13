@@ -9,6 +9,7 @@ window.onload = () => {
   userRepository = new UserRepository(userData)
   instantiateUser()
   greetUser()
+  displayUserInfo()
 }
 
 const generateRandomNumber = () => {
@@ -18,10 +19,21 @@ const generateRandomNumber = () => {
 const instantiateUser = () => {
   let randomUser = userRepository.findUser(generateRandomNumber())
   user = new User (randomUser.id, randomUser.name, randomUser.address, randomUser.email, randomUser.strideLength, randomUser.dailyStepGoal, randomUser.friends)
-  return user
 }
 
 const greetUser = () => {
   let greetingSection = document.querySelector('.greeting')
-  greetingSection.innerText = `Howdy ${user.name}`
+  greetingSection.innerText = `Howdy, ${user.name}!`
 }
+
+const displayUserInfo = () => {
+  let userInformation = document.querySelector('.user-information')
+  userInformation.insertAdjacentHTML('beforeend', 
+    `<p>Address: ${user.address}</p>
+     <p>Email: ${user.email}</p>
+     <p>Daily Step Goal: ${user.dailyStepGoal}</p>
+     <p>Stride Length: ${user.strideLength}</p>`)
+}
+
+
+
