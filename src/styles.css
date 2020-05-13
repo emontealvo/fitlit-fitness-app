@@ -1,0 +1,73 @@
+body {
+  background-color: #363636;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  width: minmax(1200px);
+  margin: 8px 8%;
+}
+
+header {
+  background-color: #242F40;
+  border-radius: 13px;
+  height: 15vh;
+  color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.greeting {
+  font-size: 34pt;
+  margin-left: 5%;
+}
+
+.date {
+  background-color: #CCA43B;
+  border-radius: 13px;
+  width: 96%;
+  height: 33%;
+  align-self: center;
+  margin: 8px;
+  margin-bottom: 13px;
+}
+
+article {
+  column-gap: 21px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  margin-top: 13px;
+  row-gap: 8px;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+article section {
+  align-items: center;
+  background-color: #e5e5e5;
+  border-radius: 13px;
+  color: #363636;
+  margin: 13px;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 144px;
+}
+
+.weekly-step-activity, 
+.weekly-sleep-activity {
+  grid-column: span 2;
+}
+
+.friend-list {
+  grid-row: 1 / span 3;
+  grid-column: 4 / span 1;     
+}
+
+/* #363636 (Jet dark brown-black)
+242F40 (gunmetal-dark blue)
+CCA43B (satin sheen gold - yellow)
+E5E5E5 (platinum off grey white) */
+
