@@ -3,6 +3,7 @@ const expect = chai.expect;
 
 const User = require('../src/User')
 const UserRepository = require('../src/userRepository');
+
 const data = [
   {
     "id": 1,
@@ -97,21 +98,29 @@ describe('User class blueprint', function() {
   });
 
   it('should hold all of a user\'s information', function() {
-    const user = new User (data[0])
+    let userRepository = new UserRepository(data)
+    const foundUser = userRepository.findUser(1)
+    const user = new User (foundUser.id, foundUser.name)
+    
 
-    expect(user.name).to.equal('"Luisa Hane"')
+    expect(user.name).to.equal("Luisa Hane")
   })
 
   it('should be able to have different user information', function() {
-    const user1 = new User(data[0]);
-    const user2 = new User(data[1]);
+    let userRepository = new UserRepository(data)
+    const foundUser = userRepository.findUser(1)
+    const foundUser2 = userRepository.findUser(2)
+    const user1 = new User (foundUser.id, foundUser.name, foundUser.address, foundUser.email, foundUser.strideLength, foundUser.dailyStepGoal, foundUser.friends)
+    const user2 = new User (foundUser2.id, foundUser2.name, foundUser2.address, foundUser2.email, foundUser2.strideLength, foundUser2.dailyStepGoal, foundUser2.friends);
 
     expect(user1.email).to.equal('Diana.Hayes1@hotmail.com')
     expect(user2.email).to.equal("Dimitri.Bechtelar11@gmail.com")
   })
 
   it('should have the ability to return only the user\'s name', function() {
-    const user = new User(data[0]);
+    let userRepository = new UserRepository(data)
+    const foundUser = userRepository.findUser(1)
+    const user = new User (foundUser.id, foundUser.name, foundUser.address, foundUser.email, foundUser.strideLength, foundUser.dailyStepGoal, foundUser.friends)
 
     expect(user.getUserName()).to.equal(user.name)
   });
