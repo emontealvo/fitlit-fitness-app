@@ -1,12 +1,14 @@
 class User {
-  constructor(id, name, address, email, strideLength, dailyStepGoal, friends) {
-    this.id = id || null; 
-    this.name = name || 'No name on file';
-    this.address = address || 'No address on file'; 
-    this.email = email || 'No email on file';
-    this.strideLength = strideLength || 'None on file'; 
-    this.dailyStepGoal = dailyStepGoal || 'No goal set';
-    this.friends = friends || 'No friends on file'
+  constructor(userInfo) {
+    if (userInfo) {
+      this.id = (userInfo.id) ? userInfo.id : "No valid id on file"; 
+      this.name = (userInfo.name) ? userInfo.name : 'No name on file';
+      this.address = (userInfo.address) ? userInfo.address : 'No address on file'; 
+      this.email = (userInfo.email) ? userInfo.email : 'No email on file';
+      this.strideLength = (userInfo.strideLength) ? userInfo.strideLength : 'None on file'; 
+      this.dailyStepGoal = (userInfo.dailyStepGoal) ? userInfo.dailyStepGoal : 'No goal set';
+      this.friends = (userInfo.friends) ? userInfo.friends : 'No friends on file'
+    }
   }
 
   getUserName() {
