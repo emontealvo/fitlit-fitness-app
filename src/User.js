@@ -13,6 +13,7 @@ class User {
     return this.name
   }
 }
+
 if (typeof module !== 'undefined') {
     module.exports = User;
   }

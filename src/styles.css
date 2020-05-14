@@ -56,7 +56,7 @@ article section {
   min-height: 144px;
 }
 
-.weekly-step-activity, 
+.user-information, 
 .weekly-sleep-activity {
   grid-column: span 2;
 }
@@ -64,6 +64,11 @@ article section {
 .friend-list {
   grid-row: 1 / span 3;
   grid-column: 4 / span 1;     
+}
+
+p {
+  font-size: 8pt;
+  line-height: 8pt;
 }
 
 /* #363636 (Jet dark brown-black)
