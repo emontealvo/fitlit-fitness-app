@@ -87,14 +87,18 @@ describe('Hydration Class when properly initiated', function() {
     expect(userHydration.getWeeklyOuncesConsumed('2019/07/02')).to.deep.equal([52, 29, 57, 99, 64, 82, 53]); 
   });
 
-  it.skip('should return a message if user\'s weekly ounces for a week are not found', function() {
+  it('should return a message if user\'s weekly ounces for a week are not found', function() {
   
-    expect(userHydration.findWeeklyOunces('2020/06/15')).to.equal('Sorry, no hydration data found for this week');
+    expect(userHydration.getWeeklyOuncesConsumed('2020/06/15')).to.deep.equal(['N/A','N/A','N/A','N/A','N/A','N/A','N/A']);
   });
 
-  it.skip('should return an error if date is not is YYYY/MM/DD format', function() {
+  it('should return user\'s water intake for a 7 day week even if incomplete', function() {
+    expect(userHydration.getWeeklyOuncesConsumed('2019/06/18')).to.deep.equal(['N/A', 'N/A', 'N/A', 37, 69, 96, 61]);
+  });
 
-    expect(userHydration.findWeeklyOunces('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
+  it('should return an error if date is not is YYYY/MM/DD format', function() {
+
+    expect(userHydration.getWeeklyOuncesConsumed('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
   });
 })
 

@@ -32,16 +32,24 @@ class Hydration {
   };
 
   getWeeklyOuncesConsumed(date) {
-    if (this.testDateInput(date)) {
-      return this.getWeekData(date).map(day => day.numOunces);
-    };
+    return (this.testDateInput(date)) ? this.getWeekNumOunces(date)
+      : 'Sorry, please use YYYY/MM/DD format';
   };
 
-  getWeekData(date) {
-    const dateIndex = this.userHydrationInfo.findIndex( day => day.date === date);
-    return this.userHydrationInfo.slice((dateIndex - 6), (dateIndex + 1));
+  getWeekNumOunces(date) {
+    return this.findWeekData(date).map( day => (day.numOunces) ? day.numOunces : 'N/A')
   };
+
+  findWeekData(date) {
+    const dateIndex = this.userHydrationInfo.findIndex( day => day.date === date);
+    const weekData = new Array(7);
+    for(let i = 0; i < 7; i++) {
+      weekData[6 - i] = (this.userHydrationInfo[dateIndex - i]) ? this.userHydrationInfo[dateIndex - i] : "N/A";
+    }
+    return weekData 
+  }
 };
+
 
 if (typeof module !== 'undefined') {
     module.exports = Hydration;
