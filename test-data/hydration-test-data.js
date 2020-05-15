@@ -318,7 +318,47 @@ const hydrationTestData = [
     "userID": 4,
     "date": "2019/06/30",
     "numOunces": 71
-  }
+  },
+  {
+    "userID": 1,
+    "date": "2019/07/01",
+    "numOunces": 82
+  },
+  {
+    "userID": 2,
+    "date": "2019/07/01",
+    "numOunces": 31
+  },
+  {
+    "userID": 3,
+    "date": "2019/07/01",
+    "numOunces": 52
+  },
+  {
+    "userID": 4,
+    "date": "2019/07/01",
+    "numOunces": 27
+  },
+  {
+    "userID": 1,
+    "date": "2019/07/02",
+    "numOunces": 53
+  },
+  {
+    "userID": 2,
+    "date": "2019/07/02",
+    "numOunces": 91
+  },
+  {
+    "userID": 3,
+    "date": "2019/07/02",
+    "numOunces": 94
+  },
+  {
+    "userID": 4,
+    "date": "2019/07/02",
+    "numOunces": 66
+  },
 ]
 
 if (typeof module !== 'undefined') {

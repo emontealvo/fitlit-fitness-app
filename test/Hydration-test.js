@@ -83,6 +83,10 @@ describe('Hydration Class when properly initiated', function() {
     expect(userHydration.getWeeklyOuncesConsumed('2019/06/23')).to.deep.equal([96, 61, 91, 50, 50, 43, 39]);
   });
 
+  it('should return user\'s water intake for a 7 week across different months', function() { 
+    expect(userHydration.getWeeklyOuncesConsumed('2019/07/02')).to.deep.equal([52, 29, 57, 99, 64, 82, 53]); 
+  });
+
   it.skip('should return a message if user\'s weekly ounces for a week are not found', function() {
   
     expect(userHydration.findWeeklyOunces('2020/06/15')).to.equal('Sorry, no hydration data found for this week');
