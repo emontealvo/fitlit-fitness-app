@@ -12,19 +12,33 @@ class Hydration {
     return userHydrationData;
   }
 
-  findFlOzConsumed(date) {
+  testDateInput(date) {
     const re = /\d{4}\/\d{2}\/\d{2}/
-
-    if(re.test(date)) {
-      const whichDay = this.userHydrationInfo.find( day => day.date === date);
-      return whichDay.numOunces
-    } else {
-      return "Sorry, no hydration data found for this date!"
-    }  
+    return re.test(date)
   }
 
-  find
-}
+  findFlOzConsumed(date) {
+    return (this.testDateInput(date) && this.findDay(date)) ? this.findDay(date).numOunces
+      : (!this.testDateInput(date)) ? 'Sorry, please use YYYY/MM/DD format'
+        : "Sorry, no hydration data found for this date!"
+  };
+
+  findDay(date) {
+    return this.userHydrationInfo.find( day => day.date === date);
+  };
+
+  getWeeklyOuncesConsumed(date) {
+    if (this.testDateInput(date)) {
+      console.log(this.getWeekData(date).map( day => day.numOunces))
+      return this.getWeekData(date).map( day => day.numOunces)
+    };
+  };
+
+  getWeekData(date) {
+    const dateIndex = this.userHydrationInfo.findIndex( day => day.date === date);
+    return this.userHydrationInfo.slice((dateIndex - 6), (dateIndex + 1))
+  };
+};
 
 
 
