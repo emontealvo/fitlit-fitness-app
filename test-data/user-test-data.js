@@ -56,8 +56,6 @@ const userData = [
   }
 ];
 
-const hydrationData = ["WHERE AM I?"]
-
 if (typeof module !== 'undefined') {
   module.exports = userData;
 }
