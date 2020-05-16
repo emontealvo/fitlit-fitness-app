@@ -32,11 +32,11 @@ header {
   margin-bottom: 13px;
 }
 
-article {
+.widget-grid {
   column-gap: 21px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: repeat(auto, minmax(180px, 200px));
   margin-top: 13px;
   row-gap: 8px;
   height: 80vh;
@@ -52,12 +52,11 @@ article section {
   padding: 13px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 144px;
+  justify-content: space-around;
 }
 
 .user-information, 
-.weekly-sleep-activity {
+.weekly-hydration-activity {
   grid-column: span 2;
 }
 
@@ -69,6 +68,28 @@ article section {
 p {
   font-size: 8pt;
   line-height: 8pt;
+}
+
+.weekday-hydration-display {
+  margin: 0px;
+  padding: 0Px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.weekly-hydration-activity h4 {
+  margin: 8px;
+  padding: 0px;
+}
+
+.weekday-hydration {
+  margin: 1px;
+  padding: 3px;
+  height: 4.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 /* #363636 (Jet dark brown-black)

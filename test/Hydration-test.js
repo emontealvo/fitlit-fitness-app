@@ -61,10 +61,6 @@ describe('Hydration Class when properly initiated', function() {
     expect(userHydration.userHydrationInfo).to.deep.equal(filteredHydrationData);
   });
 
-  it.skip('should return a message if no hydration data is found', function() {
-    expect(userHydration.userHydrationInfo).to.equal('Sorry, no hydration data found for this user.');
-  });
-
   it('should be able to return a user\'s daily ounces for a specific date', function() {
     expect(userHydration.findFlOzConsumed('2019/06/15')).to.equal(37);
   });
