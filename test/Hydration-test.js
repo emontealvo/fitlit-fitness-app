@@ -5,109 +5,103 @@ const UserRepository = require('../src/userRepository');
 const User = require('../src/User')
 const Hydration = require('../src/Hydration')
 
-const data = ('../test-data/hydration-test-data')
+const hydrationData = require('../test-data/hydration-test-data')
+const userData = require('../test-data/user-test-data')
 
 
-describe('Hydration Class', function() {
+describe('Hydration Class when parameters are missing', function() {
 
-  it.skip('should be a function', function() {
-    
+  it('should be a function', function() {
     expect(Hydration).to.be.a('function');
   });
   
-  it.skip('should be an instance of Hydration', function() {
+  it('should be an instance of Hydration', function() {
     const hydration = new Hydration()
-  
+   
     expect(hydration).to.be.an.instanceof(Hydration);
   });
   
-  it.skip('should be able to hold an array of hydration data', function () {
-    const hydration = new Hydration(data)
+  it('should be able to hold an array of hydration data', function () {
+    const hydration = new Hydration(hydrationData)
   
-    expect(hydration.allHydrationInfo).to.be.an('array')
+    expect(hydration.userHydrationInfo).to.be.an('array')
   })
   
-  it.skip('should be an empty array if no hydration data is present', function() {
+  it('should be an empty array if no hydration data is present', function() {
     const hydration = new Hydration()
   
-    expect(hydration.allHydrationInfo).to.equal([]);
+    expect(hydration.userHydrationInfo).to.deep.equal([]);
   });
 
-  it.skip('should have a current date', function() {
+  it('should have a current date property with default string of "YYYY/MM/DD"', function() {
     const hydration = new Hydration()
 
-    expect(hydration.currentDate).to.equal(hydration.returnDate())
+    expect(hydration.currentDate).to.equal("YYYY/MM/DD")
   })
 
-  it.skip('should have a current user', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
+  it('should return an error message if no user is present', function() {
+    const hydration = new Hydration()
   
-    expect(hydration.currentUser.id).to.equal(1);
+    expect(hydration.currentUserId).to.equal('Sorry, user not found.');
+  });
+});
+
+describe('Hydration Class when properly initiated', function() {
+
+  const user = new User(userData[0]);
+  const userHydration = new Hydration (user, hydrationData);
+
+  it('should have a current user', function() {
+    expect(userHydration.currentUserId).to.equal(1);
   });
 
-  it.skip('should return an error message if no user is present', function() {
-    const hydration = new Hydration(data)
-  
-    expect(hydration.currentUser).to.equal('Sorry, user not found.');
-  });
-  
+  it('should only store a user\'s hydration info', function() { 
+    const filteredHydrationData = hydrationData.filter( hydrationStat => hydrationStat.userID === user.id)
 
-  it.skip('should be able to return a user\'s hydration info', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.returnUserHydrationInfo()).to.be.an('array');
+    expect(userHydration.userHydrationInfo).to.deep.equal(filteredHydrationData);
   });
 
   it.skip('should return a message if no hydration data is found', function() {
-    const user = new User(100)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.returnUserHydrationInfo()).to.equal('Sorry, no hydration data found for this user.');
+    expect(userHydration.userHydrationInfo).to.equal('Sorry, no hydration data found for this user.');
   });
 
-
-  it.skip('should be able to return a user\'s daily ounces for a specific date', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.filterHydrationInfoByDate('2019/06/15')).to.equal(37);
+  it('should be able to return a user\'s daily ounces for a specific date', function() {
+    expect(userHydration.findFlOzConsumed('2019/06/15')).to.equal(37);
   });
 
-  it.skip('should return a message if user\'s daily ounces for a specific date are not found', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.filterHydrationInfoByDate('2020/06/15')).to.equal('Sorry, no hydration data found for this date!');
+  it('should return a message if user\'s daily ounces for a specific date are not found', function() {
+   
+    expect(userHydration.findFlOzConsumed('2020/06/15')).to.equal('Sorry, no hydration data found for this date!');
   });
 
-  it.skip('should return an error if date is not is YYYY/MM/DD format', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.filterHydrationInfoByDate('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
+  it('should return an error if date is not is YYYY/MM/DD format', function() {  
+    expect(userHydration.findFlOzConsumed('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
   });
 
-  it.skip('should return user\'s water intake for a 7 week', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
+  it('should return user\'s water intake for a 7 week', function() {
   
-    expect(hydration.findWeeklyOunces('2019/06/23')).to.deep.equal([39, 43, 50, 50, 91, 61, 96]);
+    expect(userHydration.getWeeklyOuncesConsumed('2019/06/23')).to.deep.equal([96, 61, 91, 50, 50, 43, 39]);
   });
 
-  it.skip('should return a message if user\'s weekly ounces for a week are not found', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
-  
-    expect(hydration.findWeeklyOunces('2020/06/15')).to.equal('Sorry, no hydration data found for this week');
+  it('should return user\'s water intake for a 7 week across different months', function() { 
+    expect(userHydration.getWeeklyOuncesConsumed('2019/07/02')).to.deep.equal([52, 29, 57, 99, 64, 82, 53]); 
   });
 
-  it.skip('should return an error if date is not is YYYY/MM/DD format', function() {
-    const user = new User(1)
-    const hydration = new Hydration(data, user)
+  it('should return a message if user\'s weekly ounces for a week are not found', function() {
   
-    expect(hydration.findWeeklyOunces('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
+    expect(userHydration.getWeeklyOuncesConsumed('2020/06/15')).to.deep.equal(['N/A','N/A','N/A','N/A','N/A','N/A','N/A']);
   });
-});
+
+  it('should return user\'s water intake for a 7 day week even if incomplete', function() {
+    expect(userHydration.getWeeklyOuncesConsumed('2019/06/18')).to.deep.equal(['N/A', 'N/A', 'N/A', 37, 69, 96, 61]);
+  });
+
+  it('should return an error if date is not is YYYY/MM/DD format', function() {
+
+    expect(userHydration.getWeeklyOuncesConsumed('May 3, 1996')).to.equal('Sorry, please use YYYY/MM/DD format');
+  });
+})
+
+ 
+
   
