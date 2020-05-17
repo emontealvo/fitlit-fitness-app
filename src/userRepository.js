@@ -50,7 +50,15 @@ class UserRepository {
     })
   }
 
+  findLongestTimeSleeper(date, sleepData) {
+    let sleepDataForDate = sleepData.filter((data) => data.date === date)
+
+    let longestSleeper = sleepDataForDate.sort((a, b) => b.hoursSlept - a.hoursSlept)[0]
+    return this.userGroup.find((user) => longestSleeper.userID === user.id)
+  }
+
   
+
 }
 
 
