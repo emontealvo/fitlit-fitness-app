@@ -121,15 +121,15 @@ describe('User Repository methods involving Sleep Data', () => {
     userSleep = new Sleep(testUser, sleepData);
   });
 
-  it.skip('should find the average sleep quality for all user for all time', () => {
+  it('should find the average sleep quality for all user for all time', () => {
     expect(userRepo.calculateAllUserAvgSleepQuality(sleepData)).to.equal(3.00)
   });
 
-  it.skip('should throw an error if no data is present', () => {
+  it('should throw an error if no data is present', () => {
     expect(() => userRepo.calculateAllUserAvgSleepQuality()).to.throw(TypeError, 'No Sleep Data Present')
   });
 
-  it.skip('should find all users with quality of sleep raiting of 3 or higher', () => {
+  it('should find all users with quality of sleep raiting of 3 or higher', () => {
     expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
   });
 
