@@ -48,7 +48,7 @@ describe('Hydration Class when parameters are missing', function() {
 
 describe('Hydration Class when properly initiated', function() {
 
-  const user = new User(userData[0]);
+  const user = new User(userData[0].id);
   const userHydration = new Hydration (user, hydrationData);
 
   it('should have a current user', function() {

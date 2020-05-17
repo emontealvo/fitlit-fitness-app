@@ -19,7 +19,8 @@ const generateRandomNumber = () => {
 
 const instantiateUser = () => {
   let randomUser = userRepository.findUser(generateRandomNumber())
-  user = new User (randomUser);
+  user = new User (randomUser.id, randomUser.name, randomUser.address, 
+    randomUser.email, randomUser.strideLength, randomUser.dailyStepGoal, randomUser.friends);
   greetUser();
 }
 
