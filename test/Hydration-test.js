@@ -61,6 +61,10 @@ describe('Hydration Class when properly initiated', function() {
     expect(userHydration.userHydrationInfo).to.deep.equal(filteredHydrationData);
   });
 
+  it('should calculater the average fl Oz consumed per day for all time', function() {
+    expect(userHydration.calculateAvgFlOzConsumedPerDay()).to.equal("60.22")
+  })
+
   it('should be able to return a user\'s daily ounces for a specific date', function() {
     expect(userHydration.findFlOzConsumed('2019/06/15')).to.equal(37);
   });

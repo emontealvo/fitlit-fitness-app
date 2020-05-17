@@ -26,6 +26,12 @@ class Hydration {
     this.currentDate = (testDateInput(date)) ? date : 'Sorry, please use YYYY/MM/DD format';
   }
 
+  calculateAvgFlOzConsumedPerDay() {
+    const totalFlOzConsumed = this.userHydrationInfo.reduce(((acc, day) => acc += day.numOunces), 0)
+    const avgFlOzConsumed = totalFlOzConsumed/this.userHydrationInfo.length
+    return avgFlOzConsumed.toFixed(2)
+  }
+
   findFlOzConsumed(date) {
     return (this.testDateInput(date) && this.findDay(date)) ? this.findDay(date).numOunces
       : (!this.testDateInput(date)) ? 'Sorry, please use YYYY/MM/DD format'
