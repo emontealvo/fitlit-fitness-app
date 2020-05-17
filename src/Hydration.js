@@ -5,6 +5,7 @@ class Hydration {
     this.currentDate = (this.userHydrationInfo.length) 
       ? this.getLastDataInput().date : 'YYYY/MM/DD';
     this.flOzConsumed = this.findFlOzConsumed(this.currentDate);
+    this.weekHydrationData= this.findWeekData(this.currentDate);
   }
 
   filterHydrationData(hydrationData) {
@@ -13,12 +14,16 @@ class Hydration {
   }
 
   getLastDataInput() {
-    return this.userHydrationInfo[this.userHydrationInfo.length - 1]
+    return this.userHydrationInfo[this.userHydrationInfo.length - 1];
   }
 
   testDateInput(date) {
     const re = /\d{4}\/\d{2}\/\d{2}/;
     return re.test(date);
+  }
+
+  changeCurrentDate(date) {
+    this.currentDate = (testDateInput(date)) ? date : 'Sorry, please use YYYY/MM/DD format';
   }
 
   findFlOzConsumed(date) {
@@ -37,7 +42,7 @@ class Hydration {
   };
 
   getWeekNumOunces(date) {
-    return this.findWeekData(date).map( day => (day.numOunces) ? day.numOunces : 'N/A')
+    return this.findWeekData(date).map( day => (day.numOunces) ? day.numOunces : 'N/A');
   };
 
   findWeekData(date) {
@@ -45,12 +50,12 @@ class Hydration {
     const weekData = new Array(7);
     for(let i = 0; i < 7; i++) {
       weekData[6 - i] = (this.userHydrationInfo[dateIndex - i]) ? this.userHydrationInfo[dateIndex - i] : "N/A";
-    }
-    return weekData 
-  }
+    };
+    return weekData; 
+  };
 };
 
 
 if (typeof module !== 'undefined') {
     module.exports = Hydration;
-  }
+  };

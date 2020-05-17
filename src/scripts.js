@@ -2,16 +2,15 @@
 console.log("Hello World");
 
 let user;
-let userRepository;
+const userRepository = new UserRepository(userData);
 
 
 window.onload = () => {
-  userRepository = new UserRepository(userData)
   instantiateUser()
-  greetUser()
-  displayUserInfo()
+  instantiateUserHydration();
+  displayUserInfo();
   displayUserFriends()
-  displayAverageStepGoalForAllUsers()
+  displayAverageStepGoalForAllUsers();
 }
 
 const generateRandomNumber = () => {
@@ -20,7 +19,14 @@ const generateRandomNumber = () => {
 
 const instantiateUser = () => {
   let randomUser = userRepository.findUser(generateRandomNumber())
-  user = new User (randomUser.id, randomUser.name, randomUser.address, randomUser.email, randomUser.strideLength, randomUser.dailyStepGoal, randomUser.friends)
+  user = new User (randomUser.id, randomUser.name, randomUser.address, 
+    randomUser.email, randomUser.strideLength, randomUser.dailyStepGoal, randomUser.friends);
+  greetUser();
+}
+
+const instantiateUserHydration = () => {
+  let userHydration = new Hydration(user, hydrationData);
+  displayUserHydration(userHydration);
 }
 
 const greetUser = () => {
@@ -31,10 +37,12 @@ const greetUser = () => {
 const displayUserInfo = () => {
   let userInformationSection = document.querySelector('.user-information')
   userInformationSection.insertAdjacentHTML('beforeend', 
-    `<p>Address: ${user.address}</p>
-     <p>Email: ${user.email}</p>
-     <p>Daily Step Goal: ${user.dailyStepGoal}</p>
-     <p>Stride Length: ${user.strideLength}</p>`)
+    `<div class="user-data">
+      <p>Address: ${user.address}</p>
+      <p>Email: ${user.email}</p>
+      <p>Daily Step Goal: ${user.dailyStepGoal}</p>
+      <p>Stride Length: ${user.strideLength}</p>
+    </div>`)
 }
 
 const displayUserFriends = () => {
@@ -43,18 +51,42 @@ const displayUserFriends = () => {
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
     friendsSection.insertAdjacentHTML('beforeend',
-    `<p>Name: ${foundFriend.name}</p>
-     <p>Email: ${foundFriend.email}</p>
-     <p>Saily Step Goal: ${foundFriend.dailyStepGoal}</p>
-     <p>Stride Length: ${foundFriend.strideLength}</p>`)
+    `<div class="friend">
+      <p>Name: ${foundFriend.name}</p>
+      <p>Daily Step Goal: ${foundFriend.dailyStepGoal}</p>
+    </div>`)
   })
 }
 
 const displayAverageStepGoalForAllUsers = () => {
   let allUsersAverageStepGoalSection = document.querySelector('.all-users-average-step-goal')
   let allUsersAverageStepGoal = userRepository.calculateAverageStepGoalAllUser()
-  allUsersAverageStepGoalSection.innerText = `Average Step Goal for All Users: ${allUsersAverageStepGoal}`
+  allUsersAverageStepGoalSection.insertAdjacentHTML('beforeend', 
+  `<h5>Average Step Goal:</h5>
+   <h4>${allUsersAverageStepGoal}<h4>`)
 }
 
+const displayUserHydration = (userHydration) => {
+  displayDayHydration(userHydration);
+  displayWeekHydration(userHydration);
+};
 
+const displayDayHydration = (userHydration) => {
+  const userDayHydrationWidget = document.querySelector('.daily-hydration');
+  userDayHydrationWidget.innerHTML = 
+    `<h5> Daily Hydration: </h5>
+    <h4> ${userHydration.flOzConsumed} fl. Oz </h4>`
+};
 
+const displayWeekHydration = (userHydration) => {
+  const userWeekdayHydration = document.querySelector('.weekday-hydration-display');
+  const userWeekHydrationData = userHydration.weekHydrationData
+  userWeekHydrationData.forEach( day => {
+    let dayDisplay = new Date(day.date);
+    userWeekdayHydration.insertAdjacentHTML('beforeend', 
+      `<section class="weekday-hydration">
+        <div> ${dayDisplay.toDateString()}</div>
+        <div> ${day.numOunces} fl. Oz</div>
+      </section>`)
+  });
+}
