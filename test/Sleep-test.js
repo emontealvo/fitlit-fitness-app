@@ -13,7 +13,7 @@ describe('Sleep Class', () => {
   let userRepo, testUser, userSleep
   beforeEach(() => {
     userRepo = new UserRepository(userData)
-    testUser = new User(userRepo.userGroup[0]);
+    testUser = new User(userRepo.userGroup[0].id, userRepo.userGroup[0].name, userRepo.userGroup[0].address, userRepo.userGroup[0].email, userRepo.userGroup[0].strideLength, userRepo.userGroup[0].dailyStepGoal, userRepo.userGroup[0].friends);
     userSleep = new Sleep(testUser, sleepData);
   });
 
@@ -21,87 +21,94 @@ describe('Sleep Class', () => {
   expect(Sleep).to.be.a('function')),
 
   it('should be an instance of Sleep Class', () => {
-    userSleep = new Sleep()
     expect(userSleep).to.be.an.instanceof(Sleep);
   });
 
-  it.skip('should have an id associated with an user', () => {
+  it('should have an id associated with an user', () => {
     expect(userSleep.userId).to.equal(1)
   });
 
-  it.skip('should have a date', () => {
+  it('should have a date', () => {
     expect(userSleep).to.have.property('date')
   });
 
-  it.skip('should find the last available data point', () => {
-    expect(userSleep.findLastDataInput()).to.equal("2019/06/30");
+  it('should find the last available data point', () => {
+    expect(userSleep.findLastDataInput(sleepData)).to.equal("2019/06/30");
   });
 
-  it.skip('should have a default date of the last available data point', () => {
+  it('should have a default date of the last available data point', () => {
     expect(userSleep.date).to.equal("2019/06/30");
   });
 
-  it.skip('should be able to change the current date', () => {
+  it('should be able to change the current date', () => {
     userSleep.changeDate("2019/06/28");
     expect(userSleep.date).to.equal("2019/06/28");
   });
 
-  it.skip('should check that date parameter is in "YYYY/MM/DD" format', () => {
-    expect(userSleep.changeDate("Invalid/Date").to.equal('Please, use "YYYY/MM/DD" format'));
+  it('should check that date parameter is in "YYYY/MM/DD" format', () => {
+    expect(userSleep.changeDate("Invalid/Date")).to.equal('Please, use "YYYY/MM/DD" format');
   });
 
-  it.skip('should find the hours slept for a given day', () => {
+  it('should find the hours slept for a given day', () => {
+   
     expect(userSleep.findHoursSlept("2019/06/30")).to.equal(6.9);
   });
 
-  it.skip('should return a message if date is not found', () => {
+  it('should return a message if date is not found', () => {
     expect(userSleep.findHoursSlept("2019/08/15")).to.equal("Sorry, could not find day")
   })
 
-  it.skip('should store the hours slept for a given day', () => {
+  it('should store the hours slept for a given day', () => {
+    userSleep.changeDate("2019/06/28");
+    userSleep.findHoursSlept(userSleep.date)
+    expect(userSleep.hoursSlept).to.equal(7.6);
+
+    userSleep.changeDate("2019/06/30");
+    userSleep.findHoursSlept(userSleep.date)
     expect(userSleep.hoursSlept).to.equal(6.9);
   });
 
-  it.skip('should find the quality of sleep for a given day', () => {
+  it('should find the quality of sleep for a given day', () => {
     expect(userSleep.findSleepQuality("2019/06/28")).to.equal(4.7);
   });
 
-  it.skip('should return a message if date is not found', () => {
+  it('should return a message if date is not found', () => {
     expect(userSleep.findSleepQuality("2019/08/15")).to.equal("Sorry, could not find day")
   })
 
-  it.skip('should store the quality of sleep for a given day', () => {
+  it('should store the quality of sleep for a given day', () => {
     userSleep.changeDate("2019/06/28");
+    userSleep.findSleepQuality(userSleep.date)
     expect(userSleep.sleepQuality).to.equal(4.7);
   });
 
-  it.skip('should find the amount of hours slept each day over the course of a week', () => {
+  it('should find the amount of hours slept each day over the course of a week', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/30")
     expect(hrsSleptOverWeek).to.deep.equal([8, 5.1, 7.7, 9.4, 7.6, 5.3, 6.9])
   });
 
-  it.skip('should display "N/A" for incomplete week information', () => {
+  it('should display "N/A" for incomplete week information', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/17");
     expect(hrsSleptOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 6.1, 4.1, 8])
   });
 
-  it.skip('should find the quality of sleep for each day over the course of a week', () => {
+  it('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/30")
     expect(sleepQualityOverWeek).to.deep.equal([1.3, 3.7, 2.4, 4.6, 4.7, 1.2, 2.5])
   });
 
-  it.skip('should find the quality of sleep for each day over the course of a week', () => {
+  it('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/17")
     expect(sleepQualityOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 2.2, 3.8, 2.6])
   });
 
-  it.skip('should calculate the average sleep quality for a single user', () => {
+  it('should calculate the average sleep quality for a single user', () => {
     expect(userSleep.calculateUserAvgSleepQuality()).to.equal(2.7)
   });
 
-  it.skip('should only display two decimal points when calculatin average sleep quality', () => {
-    let user2Sleep = new Sleep(userRepo.userGroup[1])
-    expect(user2Sleep.calculateUserAvgSleepQuality()).to.equal(3.13)
+  it('should only display two decimal points when calculatin average sleep quality', () => {
+    let user2Sleep = new Sleep(userRepo.userGroup[1], sleepData)
+    expect(user2Sleep.calculateUserAvgSleepQuality()).to.equal(3.14)
   });
 });
 
