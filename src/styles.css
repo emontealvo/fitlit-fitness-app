@@ -56,7 +56,8 @@ article section {
 }
 
 .user-information, 
-.weekly-hydration-activity {
+.weekly-hydration-activity,
+.sleep-information {
   grid-column: span 2;
 }
 
