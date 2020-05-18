@@ -110,6 +110,10 @@ describe('Sleep Class', () => {
     let user2Sleep = new Sleep(userRepo.userGroup[1], sleepData)
     expect(user2Sleep.calculateUserAvgSleepQuality()).to.equal(3.14)
   });
+
+  it('should calculate the average hours slept for a single user', () => {
+    expect(userSleep.calculateUserAvgHoursSlept()).to.equal(7.57)
+  });
 });
 
 describe('User Repository methods involving Sleep Data', () => {
@@ -133,11 +137,11 @@ describe('User Repository methods involving Sleep Data', () => {
     expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
+  it('should find the user(s) that slept the most hours for a given date', () => {
     expect(userRepo.findLongestTimeSleeper("2019/06/30", sleepData)).to.equal(userRepo.userGroup[1]);
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
+  it('should find the user(s) that slept the most hours for a given date', () => {
     expect(userRepo.findLongestTimeSleeper("2019/06/24", sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]]);
   });
 });

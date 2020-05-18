@@ -64,6 +64,14 @@ class Sleep {
 
     return Number(averageQuality.toFixed(2))
   }
+
+  calculateUserAvgHoursSlept() {
+    let averageHours = this.userSleepData.reduce((acc, data) => {
+      return acc += data.hoursSlept
+    }, 0) / this.userSleepData.length
+
+    return Number(averageHours.toFixed(2))
+  }
 }
 
 if (typeof module !== 'undefined') {
