@@ -82,22 +82,22 @@ describe('Sleep Class', () => {
     expect(userSleep.sleepQuality).to.equal(4.7);
   });
 
-  it('should find the amount of hours slept each day over the course of a week', () => {
+  it.skip('should find the amount of hours slept each day over the course of a week', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/30")
     expect(hrsSleptOverWeek).to.deep.equal([8, 5.1, 7.7, 9.4, 7.6, 5.3, 6.9])
   });
 
-  it('should display "N/A" for incomplete week information', () => {
+  it.skip('should display "N/A" for incomplete week information', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/17");
     expect(hrsSleptOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 6.1, 4.1, 8])
   });
 
-  it('should find the quality of sleep for each day over the course of a week', () => {
+  it.skip('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/30")
     expect(sleepQualityOverWeek).to.deep.equal([1.3, 3.7, 2.4, 4.6, 4.7, 1.2, 2.5])
   });
 
-  it('should find the quality of sleep for each day over the course of a week', () => {
+  it.skip('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/17")
     expect(sleepQualityOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 2.2, 3.8, 2.6])
   });

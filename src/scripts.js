@@ -117,13 +117,14 @@ const displayDailySleepInfo = (sleepObject) => {
 
 const displayWeeklySleepInfo = (sleepObject) => {
   const userWeekdaySleep = document.querySelector('.sleep-information');
-  let hoursSleptForWeek = sleepObject.findHrsSleptOverWeek(sleepObject.date)
-  let sleepQualityForWeek = sleepObject.findSleepQualityOverWeek(sleepObject.date)
+  let hoursSleptForWeek = sleepObject.findSleepDataOverWeek(sleepObject.date)
+  // let sleepQualityForWeek = sleepObject.findSleepQualityOverWeek(sleepObject.date)
   hoursSleptForWeek.forEach( day => {
-    console.log(sleepObject.date)
     userWeekdaySleep.insertAdjacentHTML('beforeend', 
       `<section class="weekday-hydration">
-        <div> ${day}</div>
+        <h4> ${day.date}</h4>
+        <h6> Sleep Quality: ${day.sleepQuality}</h6>
+        <h6> Hours Slept: ${day.hoursSlept}</h6>
       </section>`)
   });
 }

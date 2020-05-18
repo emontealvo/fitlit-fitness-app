@@ -39,25 +39,26 @@ class Sleep {
     return findDataForDate ? this.sleepQuality = findDataForDate.sleepQuality : 'Sorry, could not find day'
   }
 
-  findHrsSleptOverWeek(date) {
+  findSleepDataOverWeek(date) {
     const dateIndex = this.userSleepData.findIndex( day => day.date === date)
     const weekData = new Array(7);
     for (let i = 0; i < 7; i++) {
       //going to need to return the date as well
-      weekData[6 - i] = (this.userSleepData[dateIndex - i]) ? this.userSleepData[dateIndex - i].hoursSlept : "N/A";
+      weekData[6 - i] = (this.userSleepData[dateIndex - i]) ? this.userSleepData[dateIndex - i] : "N/A";
     }
+    console.log(weekData)
     return weekData
   }
 
-  findSleepQualityOverWeek(date) {
-    const dateIndex = this.userSleepData.findIndex( day => day.date === date)
-    const weekData = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      //going to need to return the date as well
-      weekData[6 - i] = (this.userSleepData[dateIndex - i]) ? this.userSleepData[dateIndex - i].sleepQuality : "N/A";
-    }
-    return weekData
-  }
+  // findSleepQualityOverWeek(date) {
+  //   const dateIndex = this.userSleepData.findIndex( day => day.date === date)
+  //   const weekData = new Array(7);
+  //   for (let i = 0; i < 7; i++) {
+  //     //going to need to return the date as well
+  //     weekData[6 - i] = (this.userSleepData[dateIndex - i]) ? this.userSleepData[dateIndex - i].sleepQuality : "N/A";
+  //   }
+  //   return weekData
+  // }
 
   calculateUserAvgSleepQuality() {
     let averageQuality = this.userSleepData.reduce((acc, data) => {
