@@ -137,6 +137,10 @@ describe('User Repository methods involving Sleep Data', () => {
     expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
   });
 
+  it('should find all users with quality of sleep raiting of 3 or higher', () => {
+    expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
+  });
+
   it('should find the user(s) that slept the most hours for a given date', () => {
     expect(userRepo.findLongestTimeSleeper("2019/06/30", sleepData)).to.equal(userRepo.userGroup[1]);
   });

@@ -102,6 +102,8 @@ const displaySleepInformation = (sleepObject) => {
   let hoursSleptForWeek = sleepObject.findHrsSleptOverWeek(sleepObject.date)
   let sleepQualityForWeek = sleepObject.findSleepQualityOverWeek(sleepObject.date)
   let allTimeSleepQuality = sleepObject.calculateUserAvgSleepQuality()
+  let allTimeHoursSlept = sleepObject.calculateUserAvgHoursSlept()
+  console.log(allTimeHoursSlept)
 }
 
 // For a user, their sleep data for the latest day (hours slept and quality of sleep)
