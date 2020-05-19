@@ -82,22 +82,22 @@ describe('Sleep Class', () => {
     expect(userSleep.sleepQuality).to.equal(4.7);
   });
 
-  it('should find the amount of hours slept each day over the course of a week', () => {
+  it.skip('should find the amount of hours slept each day over the course of a week', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/30")
     expect(hrsSleptOverWeek).to.deep.equal([8, 5.1, 7.7, 9.4, 7.6, 5.3, 6.9])
   });
 
-  it('should display "N/A" for incomplete week information', () => {
+  it.skip('should display "N/A" for incomplete week information', () => {
     const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/17");
     expect(hrsSleptOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 6.1, 4.1, 8])
   });
 
-  it('should find the quality of sleep for each day over the course of a week', () => {
+  it.skip('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/30")
     expect(sleepQualityOverWeek).to.deep.equal([1.3, 3.7, 2.4, 4.6, 4.7, 1.2, 2.5])
   });
 
-  it('should find the quality of sleep for each day over the course of a week', () => {
+  it.skip('should find the quality of sleep for each day over the course of a week', () => {
     const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/17")
     expect(sleepQualityOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 2.2, 3.8, 2.6])
   });
@@ -109,6 +109,10 @@ describe('Sleep Class', () => {
   it('should only display two decimal points when calculatin average sleep quality', () => {
     let user2Sleep = new Sleep(userRepo.userGroup[1], sleepData)
     expect(user2Sleep.calculateUserAvgSleepQuality()).to.equal(3.14)
+  });
+
+  it('should calculate the average hours slept for a single user', () => {
+    expect(userSleep.calculateUserAvgHoursSlept()).to.equal(7.57)
   });
 });
 
@@ -133,11 +137,15 @@ describe('User Repository methods involving Sleep Data', () => {
     expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
+  it('should find all users with quality of sleep raiting of 3 or higher', () => {
+    expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
+  });
+
+  it('should find the user(s) that slept the most hours for a given date', () => {
     expect(userRepo.findLongestTimeSleeper("2019/06/30", sleepData)).to.equal(userRepo.userGroup[1]);
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
+  it('should find the user(s) that slept the most hours for a given date', () => {
     expect(userRepo.findLongestTimeSleeper("2019/06/24", sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]]);
   });
 });
