@@ -51,6 +51,10 @@ const displayUserFriends = () => {
   let foundFriend
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
+    //foundFriend.name === new Activity(activityData)
+    //let varName = foundFriend.returnTotalStepsForGivenWeek()
+    //display friends steps for week &&
+    //difference between them and user
     friendsSection.insertAdjacentHTML('beforeend',
     `<div class="friend">
       <p><span>Name:</span> ${foundFriend.name}</p>
@@ -115,13 +119,13 @@ const displayDailySleepInfo = (sleepObject) => {
 const displayWeeklySleepInfo = (sleepObject) => {
   const userWeekdaySleep = document.querySelector('.whole-week-sleep-data-display');
   let hoursSleptForWeek = sleepObject.findSleepDataOverWeek(sleepObject.date)
-  // let sleepQualityForWeek = sleepObject.findSleepQualityOverWeek(sleepObject.date)
   hoursSleptForWeek.forEach( day => {
+    let dayDisplay = new Date(day.date);
     userWeekdaySleep.insertAdjacentHTML('beforeend', 
       `<div class="weekday-sleep-display">
-        <h4> ${day.date}</h4>
-        <h6> Sleep Quality: ${day.sleepQuality}</h6>
-        <h6> Hours Slept: ${day.hoursSlept}</h6>
+        <h5> ${dayDisplay.toDateString()}</h5>
+        <h5> ${day.sleepQuality} / 5 </h5>
+        <h5> ${day.hoursSlept} hrs.</h5>
       </div>`)
   });
 }

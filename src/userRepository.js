@@ -1,3 +1,5 @@
+// eslint-disable-next-line max-len
+
 class UserRepository {
   constructor (dataset) {
     this.userGroup = dataset || [];
@@ -41,7 +43,7 @@ class UserRepository {
       }
     })
 
-    // eslint-disable-next-line max-len
+    
     let highestQualitySleepers = [highQualitySleeperIds[0], highQualitySleeperIds[1]]
 
     return highestQualitySleepers.map((sleeper) => {
@@ -72,8 +74,48 @@ class UserRepository {
     })
   }
 
+  calculateAllUserAverages(date, data) {
+    if (date && data) {
+      let allUserInfoForDate = data.filter((day) => day.date === date)
+      
+      return {
+        stairsClimbed: allUserInfoForDate.reduce((acc, user) => {
+        return acc += user.flightsOfStairs
+        }, 0) / allUserInfoForDate.length,
 
-  
+        stepsTaken: allUserInfoForDate.reduce((acc, user) => {
+          return acc += user.numSteps
+        }, 0) / allUserInfoForDate.length,
+
+        minutesActive: allUserInfoForDate.reduce((acc, user) => {
+          return acc += user.minutesActive
+        }, 0) / allUserInfoForDate.length
+      }
+      
+    } else {
+      return 'Sorry, incomplete information, cannot return data'
+    }
+  }
+
+  // calculateAllUserAvgStepsTaken(date, data) {
+  //   if (date && data) {
+  //     let allUserInfoForDate = data.filter((day) => day.date === date)
+      
+  //     return 
+  //   } else {
+  //     return 'Sorry, incomplete information, cannot return data'
+  //   }
+  // }
+
+  // calculateAllUserAvgMinutesActive(date, data) {
+  //   if (date && data) {
+  //     let allUserInfoForDate = data.filter((day) => day.date === date)
+      
+     
+  //   } else {
+  //     return 'Sorry, incomplete information, cannot return data'
+  //   }
+  // }
 }
 
 

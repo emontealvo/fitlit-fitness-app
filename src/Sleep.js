@@ -43,10 +43,8 @@ class Sleep {
     const dateIndex = this.userSleepData.findIndex( day => day.date === date)
     const weekData = new Array(7);
     for (let i = 0; i < 7; i++) {
-      //going to need to return the date as well
       weekData[6 - i] = (this.userSleepData[dateIndex - i]) ? this.userSleepData[dateIndex - i] : "N/A";
     }
-    console.log(weekData)
     return weekData
   }
 
