@@ -15,20 +15,25 @@ describe('Activity Class', () => {
   beforeEach(() => {
     userRepo = new UserRepository(userData)
     testUser = new User(userRepo.userGroup[0].id, userRepo.userGroup[0].name, userRepo.userGroup[0].address, userRepo.userGroup[0].email, userRepo.userGroup[0].strideLength, userRepo.userGroup[0].dailyStepGoal, userRepo.userGroup[0].friends);
-    userActivity = new Activity(testUser, sleepData);
+    userActivity = new Activity(testUser, acData);
   });
 
   it.skip('should be a function', () =>
-  expect(Activity).to.be.a('function')),
+    expect(Activity).to.be.a('function')),
 
   it.skip('should be an instance of Sleep Class', () => {
     expect(userActivity).to.be.an.instanceof(Activity);
   });
 
-  it.skip('should have an id associated with an user', () => {
+  it.skip('should have a current user', () => {
 
-    expect(userActivity.userId).to.equal(1)
+    expect(userActivity.currentUser).to.equal(testUser)
   });
+
+  it.skip('should all activity data for current user', () => {
+
+    expect(userActivity.allUserActivity[0]).to.equal(a)
+  })
 
   it.skip('should have a date', () => {
 
@@ -54,12 +59,13 @@ describe('Activity Class', () => {
     expect(userActivity.changeDate("Invalid/Date")).to.equal('Please, use "YYYY/MM/DD" format');
   });
 
-  it.skip('should store the hours steps taken on a given day', () => {
+  it.skip('should store the steps taken on a given day', () => {
    
     expect(userActivity.findStepsForGivenDay("2019/06/30")).to.equal(14880);
   });
 
   it.skip('should return a message if date is not found', () => {
+
     expect(userActivity.findStepsForGivenDay("2016/06/30")).to.equal("Sorry, could not find day")
   })
 
@@ -67,10 +73,6 @@ describe('Activity Class', () => {
     userSleep.changeDate("2019/06/28");
     userSleep.findHoursSlept(userSleep.date)
     expect(userSleep.hoursSlept).to.equal(7.6);
-
-    userSleep.changeDate("2019/06/30");
-    userSleep.findHoursSlept(userSleep.date)
-    expect(userSleep.hoursSlept).to.equal(6.9);
   });
 
   it.skip('should find the quality of sleep for a given day', () => {
