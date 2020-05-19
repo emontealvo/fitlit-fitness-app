@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -5,7 +7,7 @@ const UserRepository = require('../src/userRepository');
 const User = require('../src/User')
 const Activity = require('../src/Activity')
 
-const activityData = require('../test-data/activity-test-data')
+const activityTestData = require('../test-data/activity-test-data')
 const userData = require('../test-data/user-test-data')
 
 describe('Activity Class', () => {
@@ -15,13 +17,13 @@ describe('Activity Class', () => {
   beforeEach(() => {
     userRepo = new UserRepository(userData)
     testUser = new User(userRepo.userGroup[0].id, userRepo.userGroup[0].name, userRepo.userGroup[0].address, userRepo.userGroup[0].email, userRepo.userGroup[0].strideLength, userRepo.userGroup[0].dailyStepGoal, userRepo.userGroup[0].friends);
-    userActivity = new Activity(testUser, acData);
+    userActivity = new Activity(testUser, activityTestData);
   });
 
   it.skip('should be a function', () =>
     expect(Activity).to.be.a('function')),
 
-  it.skip('should be an instance of Sleep Class', () => {
+  it.skip('should be an instance of Activity Class', () => {
     expect(userActivity).to.be.an.instanceof(Activity);
   });
 
@@ -30,9 +32,14 @@ describe('Activity Class', () => {
     expect(userActivity.currentUser).to.equal(testUser)
   });
 
-  it.skip('should all activity data for current user', () => {
+  it.skip('should store all activity data for current user', () => {
+    
+    expect(userActivity.allUserActivity[0]).to.equal(activityTestData[0])
+  })
 
-    expect(userActivity.allUserActivity[0]).to.equal(a)
+  it.skip('should display a message when no activity data for current user is present', () => {
+    userActivity = new Activity(testUser)
+    expect(userActivity.allUserActivity).to.equal('No user data present')
   })
 
   it.skip('should have a date', () => {
@@ -40,10 +47,9 @@ describe('Activity Class', () => {
     expect(userActivity).to.have.property('date')
   });
 
-
   it.skip('should be able to find the last available date', () => {
 
-    expect(userActivity.findLastAvailableDate(activityData)).to.equal("2019/06/30");
+    expect(userActivity.findLastAvailableDate(activityTestData)).to.equal("2019/06/30");
   });
 
   it.skip('date should default to the last available date', () => {
@@ -51,6 +57,7 @@ describe('Activity Class', () => {
   });
 
   it.skip('should be able to change the current date', () => {
+    
     userActivity.changeDate("2019/06/28");
     expect(userActivity.date).to.equal("2019/06/28");
   });
@@ -59,7 +66,7 @@ describe('Activity Class', () => {
     expect(userActivity.changeDate("Invalid/Date")).to.equal('Please, use "YYYY/MM/DD" format');
   });
 
-  it.skip('should store the steps taken on a given day', () => {
+  it.skip('should return the steps taken on a given day', () => {
    
     expect(userActivity.findStepsForGivenDay("2019/06/30")).to.equal(14880);
   });
@@ -67,55 +74,73 @@ describe('Activity Class', () => {
   it.skip('should return a message if date is not found', () => {
 
     expect(userActivity.findStepsForGivenDay("2016/06/30")).to.equal("Sorry, could not find day")
+  });
+
+  it.skip('return user\'s active munutes for a given day', () => {
+      
+    expect(userActivity.returnActiveMinutesForGivenDay("2019/06/28")).to.equal(169);
+    expect(userActivity.returnActiveMinutesForGivenDay("2019/06/30")).to.equal(21);
+  });
+
+  it.skip('should return an error message if user\'s active minutes for a given day are not found', () => {
+
+    expect(userActivity.returnActiveMinutesForGivenDay("2015/06/30")).to.equal('No activity data found for this date');
+  });
+    
+    
+  it.skip('return user\'s distance walked in miles for a given day', () => {
+
+    expect(userActivity.returnMilesWalked("2019/06/29")).to.equal(5.68);
+    expect(userActivity.returnMilesWalked("2019/06/30")).to.equal(12.11);
+  });
+
+  it.skip('should find and store activity data for a given week', () => {
+
+    userActivity.findUserActivityForGivenWeek('2019/06/30');
+    expect(userActivity.infoForGivenWeek).to.be.an('array').that.has.lengthOf(7)
+  });
+
+  it.skip('should store N/A if a date is not found for a given week', function() {
+    userActivity.findUserActivityForGivenWeek('2019/06/15');
+    expect(userActivity.infoForGivenWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", activityTestData[0]])
   })
 
-  it.skip('should store the hours slept for a given day', () => {
-    userSleep.changeDate("2019/06/28");
-    userSleep.findHoursSlept(userSleep.date)
-    expect(userSleep.hoursSlept).to.equal(7.6);
+  it.skip('should return average of user\'s active minutes for a given week', () => {
+
+    expect(userActivity.returnAverageMinutesActiveForWeek("2019/06/30")).to.equal(104.42);
   });
 
-  it.skip('should find the quality of sleep for a given day', () => {
-    expect(userSleep.findSleepQuality("2019/06/28")).to.equal(4.7);
+  it.skip('should return average of user\'s active minutes for a given week even if incomplete', () => {
+    
+    userActivity.findUserActivityForGivenWeek('2019/06/15');
+    expect(userActivity.returnAverageMinutesActiveForWeek("2019/06/15")).to.equal(140);
   });
 
-  it.skip('should return a message if date is not found', () => {
-    expect(userSleep.findSleepQuality("2019/08/15")).to.equal("Sorry, could not find day")
-  })
-
-  it.skip('should store the quality of sleep for a given day', () => {
-    userSleep.changeDate("2019/06/28");
-    userSleep.findSleepQuality(userSleep.date)
-    expect(userSleep.sleepQuality).to.equal(4.7);
+  it.skip('should return a message whether user reaches step goal for given day or not', () => {
+    
+    expect(userActivity.didUserReachDailyStepGoal('2019/06/15')).to.equal('Sorry, you did not reach your step goal on 2019/06/15');
+    expect(userActivity.didUserReachDailyStepGoal('2019/06/30')).to.equal('WooHoo! You reached your step goal on 2019/06/30');
   });
 
-  it.skip('should find the amount of hours slept each day over the course of a week', () => {
-    const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/30")
-    expect(hrsSleptOverWeek).to.deep.equal([8, 5.1, 7.7, 9.4, 7.6, 5.3, 6.9])
+  it.skip('should return an error message if date does not exist', () => {
+
+    expect(userActivity.didUserReachDailyStepGoal("2015/06/30")).to.equal('No activity data found for this date');
   });
 
-  it.skip('should display "N/A" for incomplete week information', () => {
-    const hrsSleptOverWeek = userSleep.findHrsSleptOverWeek("2019/06/17");
-    expect(hrsSleptOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 6.1, 4.1, 8])
+  it.skip('should return all dates where user reached their step goal', () => {
+
+    expect(userActivity.allDaysUserReachedStepGoal()).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23', '2019/06/28', '2019/06/30']);
   });
 
-  it.skip('should find the quality of sleep for each day over the course of a week', () => {
-    const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/30")
-    expect(sleepQualityOverWeek).to.deep.equal([1.3, 3.7, 2.4, 4.6, 4.7, 1.2, 2.5])
+  it.skip('should be able to return user all time stair climbing record', function() {
+
+    expect(userActivity.allTimeStairClimbingRecord()).to.equal(39)
   });
 
-  it.skip('should find the quality of sleep for each day over the course of a week', () => {
-    const sleepQualityOverWeek = userSleep.findSleepQualityOverWeek("2019/06/17")
-    expect(sleepQualityOverWeek).to.deep.equal(["N/A", "N/A", "N/A", "N/A", 2.2, 3.8, 2.6])
-  });
+  it.skip('should calculate user\'s speed for given date', function() {
 
-  it.skip('should calculate the average sleep quality for a single user', () => {
-    expect(userSleep.calculateUserAvgSleepQuality()).to.equal(2.7)
-  });
 
-  it.skip('should only display two decimal points when calculatin average sleep quality', () => {
-    let user2Sleep = new Sleep(userRepo.userGroup[1], sleepData)
-    expect(user2Sleep.calculateUserAvgSleepQuality()).to.equal(3.14)
+    expect(userActivity.calculateSpeedForGivenDate('2019/06/17')).to.equal('On 2019/06/17 you walked 4.16 miles per hour!')
   });
 });
 
@@ -125,26 +150,36 @@ describe('User Repository methods involving Activity Data', () => {
   beforeEach(() => {
     userRepo = new UserRepository(userData)
     testUser = new User(userRepo.userGroup[0].id, userRepo.userGroup[0].name, userRepo.userGroup[0].address, userRepo.userGroup[0].email, userRepo.userGroup[0].strideLength, userRepo.userGroup[0].dailyStepGoal, userRepo.userGroup[0].friends);
-    userActivity = new Activity(testUser, activityData);
+    userActivity = new Activity(testUser, activityTestData);
   });
 
-  it.skip('should find the average sleep quality for all user for all time', () => {
-    expect(userRepo.calculateAllUserAvgSleepQuality(sleepData)).to.equal(3.00)
+  it.skip('should find the average stairs climbed for all user for a given date', () => {
+
+    expect(userRepo.calculateAllUserAvgStairsClimbed('2019/06/30', activityTestData)).to.equal(26.25)
   });
 
-  it.skip('should throw an error if no data is present', () => {
-    expect(() => userRepo.calculateAllUserAvgSleepQuality()).to.throw(TypeError, 'No Sleep Data Present')
+  it.skip('should return an error message if arguments aren\'t passed in', () => {
+
+    expect(userRepo.calculateAllUserAvgStairsClimbed(activityTestData)).to.equal('Sorry, incomplete information, cannot return data')
   });
 
-  it.skip('should find all users with quality of sleep raiting of 3 or higher', () => {
-    expect(userRepo.findHighQualitySleepers(sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]])
+  it.skip('should find the average steps taken for all user for a given date', () => {
+
+    expect(userRepo.calculateAllUserAvgStepsTaken('2019/06/30', activityTestData)).to.equal(11799.50)
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
-    expect(userRepo.findLongestTimeSleeper("2019/06/30", sleepData)).to.equal(userRepo.userGroup[1]);
+  it.skip('should return an error message if arguments aren\'t passed in', () => {
+
+    expect(userRepo.calculateAllUserAvgStepsTaken(activityTestData)).to.equal('Sorry, incomplete information, cannot return data')
   });
 
-  it.skip('should find the user(s) that slept the most hours for a given date', () => {
-    expect(userRepo.findLongestTimeSleeper("2019/06/24", sleepData)).to.deep.equal([userRepo.userGroup[1], userRepo.userGroup[2]]);
+  it.skip('should find the average minutes active for all user for a given date', () => {
+
+    expect(userRepo.calculateAllUserAvgMinutesActive('2019/06/30', activityTestData)).to.equal(144.75)
+  });
+
+  it.skip('should return an error message if arguments aren\'t passed in', () => {
+
+    expect(userRepo.calculateAllUserAvgMinutesActive('2019/06/30')).to.equal('Sorry, incomplete information, cannot return data')
   });
 });

@@ -1,6 +1,6 @@
 class Activity {
   constructor() {
-    
+
   }
 }
 
@@ -8,5 +8,5 @@ class Activity {
 
 
 if (typeof module !== 'undefined') {
-    module.exports = Activity;
-  }
+  module.exports = Activity;
+}
