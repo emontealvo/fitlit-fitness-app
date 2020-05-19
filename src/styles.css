@@ -61,6 +61,7 @@ aside {
 .week-sleep-data  {
   grid-column: 1 / span 2;
 }
+
 .sleep-information {
   grid-column: span 2;
 }
