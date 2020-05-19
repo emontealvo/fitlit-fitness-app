@@ -39,10 +39,10 @@ const displayUserInfo = () => {
   let userInformationSection = document.querySelector('.user-information')
   userInformationSection.insertAdjacentHTML('beforeend', 
     `<div class="user-data">
-      <p>Address: ${user.address}</p>
-      <p>Email: ${user.email}</p>
-      <p>Daily Step Goal: ${user.dailyStepGoal}</p>
-      <p>Stride Length: ${user.strideLength}</p>
+      <p><span>Address:</span> ${user.address}</p>
+      <p><span>Email:</span> ${user.email}</p>
+      <p><span>Daily Step Goal:</span> ${user.dailyStepGoal}</p>
+      <p><span>Stride Length:</span> ${user.strideLength}</p>
     </div>`)
 }
 
@@ -52,19 +52,17 @@ const displayUserFriends = () => {
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
     friendsSection.insertAdjacentHTML('beforeend',
-      `<div class="friend">
-      <p>Name: ${foundFriend.name}</p>
-      <p>Daily Step Goal: ${foundFriend.dailyStepGoal}</p>
+    `<div class="friend">
+      <p><span>Name:</span> ${foundFriend.name}</p>
+      <p><span>Daily Step Goal:</span> ${foundFriend.dailyStepGoal}</p>
     </div>`)
   })
 }
 
 const displayAverageStepGoalForAllUsers = () => {
-  let allUsersAverageStepGoalSection = document.querySelector('.all-users-average-step-goal')
+  let allUsersAverageStepGoalDisplay = document.querySelector('.all-users-average-step-goal')
   let allUsersAverageStepGoal = userRepository.calculateAverageStepGoalAllUser()
-  allUsersAverageStepGoalSection.insertAdjacentHTML('beforeend', 
-    `<h5>Average Step Goal:</h5>
-   <h4>${allUsersAverageStepGoal}<h4>`)
+  allUsersAverageStepGoalDisplay.insertAdjacentHTML('beforeend', `<h4>${allUsersAverageStepGoal}<h4>`)
 }
 
 const displayUserHydration = (userHydration) => {
@@ -75,20 +73,20 @@ const displayUserHydration = (userHydration) => {
 const displayDayHydration = (userHydration) => {
   const userDayHydrationWidget = document.querySelector('.daily-hydration');
   userDayHydrationWidget.innerHTML = 
-    `<h5> Daily Hydration: </h5>
+    `<h4> Daily Hydration: </h4>
     <h4> ${userHydration.flOzConsumed} fl. Oz </h4>`
 };
 
 const displayWeekHydration = (userHydration) => {
   const userWeekdayHydration = document.querySelector('.weekday-hydration-display');
-  const userWeekHydrationData = userHydration.weekHydrationData
+  const userWeekHydrationData = userHydration.weekHydrationData;
   userWeekHydrationData.forEach( day => {
     let dayDisplay = new Date(day.date);
     userWeekdayHydration.insertAdjacentHTML('beforeend', 
-      `<section class="weekday-hydration">
-        <div> ${dayDisplay.toDateString()}</div>
-        <div> ${day.numOunces} fl. Oz</div>
-      </section>`)
+      `<div class="weekday-hydration">
+        <h5> ${dayDisplay.toDateString()}</h5>
+        <h4> ${day.numOunces} fl. Oz</h4>
+      </div>`)
   });
 }
 
@@ -102,7 +100,6 @@ const displaySleepInformation = (sleepObject) => {
   displayWeeklySleepInfo(sleepObject)
   let allTimeSleepQuality = sleepObject.calculateUserAvgSleepQuality()
   let allTimeHoursSlept = sleepObject.calculateUserAvgHoursSlept()
-  console.log(allTimeHoursSlept)
 }
 
 const displayDailySleepInfo = (sleepObject) => {
@@ -116,16 +113,16 @@ const displayDailySleepInfo = (sleepObject) => {
 }
 
 const displayWeeklySleepInfo = (sleepObject) => {
-  const userWeekdaySleep = document.querySelector('.sleep-information');
+  const userWeekdaySleep = document.querySelector('.whole-week-sleep-data-display');
   let hoursSleptForWeek = sleepObject.findSleepDataOverWeek(sleepObject.date)
   // let sleepQualityForWeek = sleepObject.findSleepQualityOverWeek(sleepObject.date)
   hoursSleptForWeek.forEach( day => {
     userWeekdaySleep.insertAdjacentHTML('beforeend', 
-      `<section class="weekday-hydration">
+      `<div class="weekday-sleep-display">
         <h4> ${day.date}</h4>
         <h6> Sleep Quality: ${day.sleepQuality}</h6>
         <h6> Hours Slept: ${day.hoursSlept}</h6>
-      </section>`)
+      </div>`)
   });
 }
 

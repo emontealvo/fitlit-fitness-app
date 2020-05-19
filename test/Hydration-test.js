@@ -34,13 +34,13 @@ describe('Hydration Class when parameters are missing', function() {
   });
 
   it('should have a current date property with default string of "YYYY/MM/DD"', function() {
-    const hydration = new Hydration()
+    const hydration = new Hydration();
 
-    expect(hydration.currentDate).to.equal("YYYY/MM/DD")
-  })
+    expect(hydration.currentDate).to.equal("YYYY/MM/DD");
+  });
 
   it('should return an error message if no user is present', function() {
-    const hydration = new Hydration()
+    const hydration = new Hydration();
   
     expect(hydration.currentUserId).to.equal('Sorry, user not found.');
   });
@@ -56,9 +56,13 @@ describe('Hydration Class when properly initiated', function() {
   });
 
   it('should only store a user\'s hydration info', function() { 
-    const filteredHydrationData = hydrationData.filter( hydrationStat => hydrationStat.userID === user.id)
+    const filteredHydrationData = hydrationData.filter( hydrationStat => hydrationStat.userID === user.id);
 
     expect(userHydration.userHydrationInfo).to.deep.equal(filteredHydrationData);
+  });
+
+  it('should calculater the average fl Oz consumed per day for all time', function() {
+    expect(userHydration.calculateAvgFlOzConsumedPerDay()).to.equal("60.22");
   });
 
   it('should be able to return a user\'s daily ounces for a specific date', function() {
@@ -66,8 +70,7 @@ describe('Hydration Class when properly initiated', function() {
   });
 
   it('should return a message if user\'s daily ounces for a specific date are not found', function() {
-   
-    expect(userHydration.findFlOzConsumed('2020/06/15')).to.equal('Sorry, no hydration data found for this date!');
+   expect(userHydration.findFlOzConsumed('2020/06/15')).to.equal('Sorry, no hydration data found for this date!');
   });
 
   it('should return an error if date is not is YYYY/MM/DD format', function() {  
