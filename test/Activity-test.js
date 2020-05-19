@@ -5,7 +5,7 @@ const UserRepository = require('../src/userRepository');
 const User = require('../src/User')
 const Activity = require('../src/Activity')
 
-const sleepData = require('../test-data/sleep-test-data')
+const activityData = require('../test-data/activity-test-data')
 const userData = require('../test-data/user-test-data')
 
 describe('Activity Class', () => {
@@ -19,44 +19,48 @@ describe('Activity Class', () => {
   });
 
   it.skip('should be a function', () =>
-  expect(Sleep).to.be.a('function')),
+  expect(Activity).to.be.a('function')),
 
   it.skip('should be an instance of Sleep Class', () => {
-    expect(userSleep).to.be.an.instanceof(Sleep);
+    expect(userActivity).to.be.an.instanceof(Activity);
   });
 
   it.skip('should have an id associated with an user', () => {
-    expect(userSleep.userId).to.equal(1)
+
+    expect(userActivity.userId).to.equal(1)
   });
 
   it.skip('should have a date', () => {
-    expect(userSleep).to.have.property('date')
+
+    expect(userActivity).to.have.property('date')
   });
 
-  it.skip('should find the last available data point', () => {
-    expect(userSleep.findLastDataInput(sleepData)).to.equal("2019/06/30");
+
+  it.skip('should be able to find the last available date', () => {
+
+    expect(userActivity.findLastAvailableDate(activityData)).to.equal("2019/06/30");
   });
 
-  it.skip('should have a default date of the last available data point', () => {
-    expect(userSleep.date).to.equal("2019/06/30");
+  it.skip('date should default to the last available date', () => {
+    expect(userActivity.date).to.equal("2019/06/30");
   });
 
   it.skip('should be able to change the current date', () => {
-    userSleep.changeDate("2019/06/28");
-    expect(userSleep.date).to.equal("2019/06/28");
+    userActivity.changeDate("2019/06/28");
+    expect(userActivity.date).to.equal("2019/06/28");
   });
 
   it.skip('should check that date parameter is in "YYYY/MM/DD" format', () => {
-    expect(userSleep.changeDate("Invalid/Date")).to.equal('Please, use "YYYY/MM/DD" format');
+    expect(userActivity.changeDate("Invalid/Date")).to.equal('Please, use "YYYY/MM/DD" format');
   });
 
-  it.skip('should find the hours slept for a given day', () => {
+  it.skip('should store the hours steps taken on a given day', () => {
    
-    expect(userSleep.findHoursSlept("2019/06/30")).to.equal(6.9);
+    expect(userActivity.findStepsForGivenDay("2019/06/30")).to.equal(14880);
   });
 
   it.skip('should return a message if date is not found', () => {
-    expect(userSleep.findHoursSlept("2019/08/15")).to.equal("Sorry, could not find day")
+    expect(userActivity.findStepsForGivenDay("2016/06/30")).to.equal("Sorry, could not find day")
   })
 
   it.skip('should store the hours slept for a given day', () => {
@@ -113,13 +117,13 @@ describe('Activity Class', () => {
   });
 });
 
-describe('User Repository methods involving Sleep Data', () => {
+describe('User Repository methods involving Activity Data', () => {
 
-  let userRepo, testUser, userSleep
+  let userRepo, testUser, userActivity
   beforeEach(() => {
     userRepo = new UserRepository(userData)
-    testUser = new User(userRepo.userGroup[0]);
-    userSleep = new Sleep(testUser, sleepData);
+    testUser = new User(userRepo.userGroup[0].id, userRepo.userGroup[0].name, userRepo.userGroup[0].address, userRepo.userGroup[0].email, userRepo.userGroup[0].strideLength, userRepo.userGroup[0].dailyStepGoal, userRepo.userGroup[0].friends);
+    userActivity = new Activity(testUser, activityData);
   });
 
   it.skip('should find the average sleep quality for all user for all time', () => {
