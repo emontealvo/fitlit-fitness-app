@@ -89,6 +89,34 @@ class Activity {
     const speed = this.calculateMilesWalkedOnDay(date)/(this.returnActiveMinutesForGivenDay(date) / 60)
     return `On ${date} you walked ${speed.toFixed(2)} miles per hour!`
   }
+
+  friendTotalStepsComparedToUser(user, data, date) {
+    user = new Activity(user, data)
+
+    let friendSteps = this.findUserActivityForGivenWeek(date).reduce((acc, day) => {
+      return acc += day.numSteps
+    }, 0)
+
+    let userSteps = user.findUserActivityForGivenWeek(date).reduce((acc, day) => {
+      return acc += day.numSteps
+    }, 0)
+
+    if (userSteps > friendSteps) {
+      return `You had ${userSteps - friendSteps} more steps than ${this.currentUser.name} this week!`
+    }
+
+    if (userSteps < friendSteps) {
+      return `You had ${friendSteps - userSteps} less steps than ${this.currentUser.name} this week!`
+    }
+
+    if (userSteps === friendSteps) { 
+      return `You and ${this.currentUser.name} had the same amount of steps this week!`
+    } 
+
+    else {
+      return 'Cannot compare steps at this time.'
+    }
+  }
 }
 
 if (typeof module !== 'undefined') {

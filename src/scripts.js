@@ -51,14 +51,13 @@ const displayUserFriends = () => {
   let foundFriend
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
-    //foundFriend.name === new Activity(activityData)
-    //let varName = foundFriend.returnTotalStepsForGivenWeek()
-    //display friends steps for week &&
-    //difference between them and user
+    let friendID = foundFriend.id
+    friendID = new Activity (foundFriend, activityData)
     friendsSection.insertAdjacentHTML('beforeend',
     `<div class="friend">
       <p><span>Name:</span> ${foundFriend.name}</p>
       <p><span>Daily Step Goal:</span> ${foundFriend.dailyStepGoal}</p>
+      <p>${friendID.friendTotalStepsComparedToUser(user, activityData, friendID.date)}</p>
     </div>`)
   })
 }
@@ -102,6 +101,7 @@ const instantiateUserSleep = () => {
 const displaySleepInformation = (sleepObject) => {
   displayDailySleepInfo(sleepObject)
   displayWeeklySleepInfo(sleepObject)
+  //find a way to display the information below
   let allTimeSleepQuality = sleepObject.calculateUserAvgSleepQuality()
   let allTimeHoursSlept = sleepObject.calculateUserAvgHoursSlept()
 }
@@ -132,6 +132,3 @@ const displayWeeklySleepInfo = (sleepObject) => {
 
 
 
-// For a user, their sleep data for the latest day (hours slept and quality of sleep)
-// For a user, their sleep data over the course of the latest week (hours slept and quality of sleep)
-// For a user, their all-time average sleep quality and all-time average number of hours slept
