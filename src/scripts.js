@@ -12,7 +12,7 @@ window.onload = () => {
   instantiateUserActivity()
   displayUserInfo()
   displayUserFriends()
-  displayAverageStepGoalForAllUsers()
+  displayStepGoals();
 }
 
 const generateRandomNumber = () => {
@@ -52,16 +52,22 @@ const displayUserFriends = () => {
   let foundFriend
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
-    //foundFriend.name === new Activity(activityData)
-    //let varName = foundFriend.returnTotalStepsForGivenWeek()
-    //display friends steps for week &&
-    //difference between them and user
     friendsSection.insertAdjacentHTML('beforeend',
     `<div class="friend">
       <p><span>Name:</span> ${foundFriend.name}</p>
       <p><span>Daily Step Goal:</span> ${foundFriend.dailyStepGoal}</p>
     </div>`)
   })
+}
+
+const displayStepGoals = () => {
+  displayUserStepGoal();
+  displayAverageStepGoalForAllUsers();
+}
+
+const displayUserStepGoal = () => {
+  const userStepGoalDisplay = document.querySelector('.user-step-goal');
+  userStepGoalDisplay.insertAdjacentHTML('beforeend', `<h4>${user.dailyStepGoal}</h4>`) 
 }
 
 const displayAverageStepGoalForAllUsers = () => {
