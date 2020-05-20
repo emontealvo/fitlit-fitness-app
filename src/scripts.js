@@ -8,10 +8,11 @@ const userRepository = new UserRepository(userData);
 window.onload = () => {
   instantiateUser()
   instantiateUserHydration()
+  instantiateUserSleep()
+  instantiateUserActivity()
   displayUserInfo()
   displayUserFriends()
   displayAverageStepGoalForAllUsers()
-  instantiateUserSleep()
 }
 
 const generateRandomNumber = () => {
@@ -129,6 +130,49 @@ const displayWeeklySleepInfo = (sleepObject) => {
       </div>`)
   });
 }
+
+const instantiateUserActivity = () => {
+  const userActivity = new Activity (user, activityData)
+  displayActivityInformation(userActivity)
+}
+
+const displayActivityInformation = (userActivity) => {
+  displayUserActivity4Day(userActivity);
+  // displayUserActivityComparison(userActivity);
+  displayUserActivity4Week(userActivity);
+}
+
+const displayUserActivity4Day = (userActivity) => {
+  const userDayActivityDisplay = document.querySelector('.day-activity-record');
+  const date = userActivity.date
+  userDayActivityDisplay.insertAdjacentHTML('beforeend',
+    `<h5>Steps Taken:</h5>
+    <h5>${userActivity.findStepsForGivenDay(date)}</h5>
+    <h5>Miles Walked:</h5>
+    <h5>${userActivity.calculateMilesWalkedOnDay(date)}</h5>
+    <h5>Minutes Active:</h5>
+    <h5>${userActivity.returnActiveMinutesForGivenDay(date)}</h5>
+    <h5>Average Speed:</h5>
+    <h5>${userActivity.calculateSpeedForGivenDate(date)}</h5>`
+  )
+}
+
+const displayUserActivity4Week = (userActivity) => {
+  const userWeekActivityDisplay = document.querySelector('.week-activity-record');
+  const userWeekActivity = userActivity.infoForGivenWeek;
+  userWeekActivity.forEach( entry => {
+    let dayDisplay = new Date(entry.date);
+    userWeekActivityDisplay.insertAdjacentHTML('beforeend', 
+      `<div class="weekday-activity-info">
+      <h5> ${dayDisplay.toDateString()} </h5>
+      <h5> ${entry.numSteps} </h5>
+      <h5> ${entry.minutesActive} </h5>
+      <h5> ${entry.flightsOfStairs} </h5>
+      </div> `
+      )
+  })
+} 
+
 
 
 

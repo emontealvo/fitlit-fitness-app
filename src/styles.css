@@ -43,8 +43,7 @@ header {
   overflow: auto;
 }
 
-article section,
-aside {
+article section {
   align-items: center;
   background-color: #e5e5e5;
   border-radius: 13px;
@@ -58,7 +57,8 @@ aside {
 
 .user-information, 
 .weekly-hydration-activity,
-.week-sleep-data  {
+.week-sleep-data,
+.week-information  {
   grid-column: 1 / span 2;
 }
 
@@ -127,7 +127,8 @@ p {
   padding: 0px;
 }
 
-.whole-week-sleep-data-display {
+.whole-week-sleep-data-display,
+.week-activity-record {
   display: flex;
   flex-flow: row nowrap;
 }
@@ -138,7 +139,8 @@ p {
 }
 
 .weekday-sleep-display,
-.weekday-sleep-labels {
+.weekday-sleep-labels,
+.weekday-activity-info {
   color: #242F40;
   background-color: #CCA43B;
   display: grid;
@@ -148,16 +150,26 @@ p {
   padding: 3px;
 }
 
-.weekday-sleep-labels {
+.weekday-sleep-labels,
+.weekday-activity-labels {
   grid-template-columns: 68px;
   text-align: left;
   color: #ffffff;
   background-color: #242F40;
 }
 
+.weekday-activity-labels{
+  width: 80px;
+}
+
 .weekday-sleep-labels h5 {
   padding: 8px;
   margin: 5px;
+}
+
+.day-activity-record h5{
+  margin: 3px;
+  padding: 3px;
 }
 /* #363636 (Jet dark brown-black)
 242F40 (gunmetal-dark blue)
