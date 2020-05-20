@@ -87,7 +87,7 @@ class Activity {
 
   calculateSpeedForGivenDate(date) {
     const speed = this.calculateMilesWalkedOnDay(date)/(this.returnActiveMinutesForGivenDay(date) / 60)
-    return `On ${date} you walked ${speed.toFixed(2)} miles per hour!`
+    return `${speed.toFixed(2)} mph`
   }
 }
 
