@@ -6,7 +6,7 @@
 1. To use this application, you should first clone the repository. 
 2. Once you have cloned the repoository, cd into the directory, and run `npm install` to install all project dependencies.
 3. To see the project in your browser, run `open src/index.html` in the terminal. It will allow you to see the HTML page.
-4. Testing for this application can be achieved by running `npm test` in your terminal, all dependencies for testing will aldready be installed.
+4. Testing for this application can be achieved by running `npm test` in your terminal, all dependencies for testing will already be installed.
 
 ## Collaborators:
 Edwin Montealvo
