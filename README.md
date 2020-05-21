@@ -1,82 +1,31 @@
-# FitLit Starter Kit
+# FitLit
 
 The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
 
-## Setup
+## Setup/Installation:
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `open src/index.html` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-1. Make sure both members of your team are collaborators on the forked repo.
+1. To use this application, you should first clone the repository. 
+2. Once you have cloned the repoository, cd into the directory, and run `npm install` to install all project dependencies.
+3. To see the project in your browser, run `open src/index.html` in the terminal. It will allow you to see the HTML page.
+4. Testing for this application can be achieved by running `npm test` in your terminal, all dependencies for testing will aldready be installed.
 
-## Testing
+## Collaborators:
+Edwin Montealvo
+Jeremiah Black
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
+## Abstract:
+FitLit is a Mod 2 application for Turing students. 
 
-## Linting Your Code
+FitLit tracks the fitness of a user, in terms of their activity, sleep and hydration. Building this application encouraged collaboration and communication skills, refining paired programming processes, further exploration of CSS concepts learned in Mod 1, a deeper understanding of classes and the manipulation of data, and the use of OOP and TDD. In the complete application, a user is generated at random, and all information related to their fitness and friends is displayed. See below.
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+## GIF:
 
-Your linter will look only at the JavaScript files you have within the `src` and the `test` directories.
+## Technologies Used:
+JavaScript
+HTML
+CSS
+Mocha
+Chai
 
-## Data Model
 
-**Users**
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
-
-**Activity**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
-
-**Hydration**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
-
-**Sleep**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
