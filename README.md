@@ -19,8 +19,6 @@ FitLit tracks the fitness of a user, in terms of their activity, sleep and hydra
 
 ## GIF:
 
-![image](https://user-images.githubusercontent.com/60306770/82515662-fe193d80-9ad5-11ea-921d-29103e4efb79.png)
-
 ## Technologies Used:
 JavaScript
 HTML
