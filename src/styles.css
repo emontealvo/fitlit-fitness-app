@@ -33,9 +33,9 @@ header {
 }
 
 .widget-grid {
-  column-gap: 21px;
+  column-gap: 13px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(245px, 1fr));
+  grid-template-columns: repeat(4, 288px);
   grid-template-rows: repeat(auto, 200px);
   margin-top: 13px;
   row-gap: 8px;
@@ -45,7 +45,7 @@ header {
 
 article section {
   align-items: center;
-  background-color: #e5e5e5;
+  background-color: #d1d8e4;
   border-radius: 13px;
   color: #363636;
   margin: 8px;
@@ -58,7 +58,7 @@ article section {
 .user-information, 
 .weekly-hydration-activity,
 .week-sleep-data,
-.week-information  {
+.week-activity-information  {
   grid-column: 1 / span 2;
 }
 
@@ -67,8 +67,12 @@ article section {
 }
 
 .friend-list {
-  grid-row: 1 / span 3;
+  grid-row: 1 / span 4;
   grid-column: 4 / span 1;   
+}
+
+.friend-list h4 {
+  display: flex-start; 
 }
 
 p {
@@ -84,16 +88,35 @@ p {
 
 }
 
-.weekly-hydration-activity h4 {
-  margin: 8px;
+h4 {
+  margin: 0px;
   padding: 0px;
+}
+
+.user-step-goal {
+  color: #242F40;
+  background-color: #CCA43B;
+  
+}
+
+.all-users-average-step-goal {
+  color: #CCA43B;
+  background-color: #242f40
+}
+
+.all-users-average-step-goal,
+.user-step-goal {
+  border-radius: 25px;
+  width: 225px;
+  height: 150px;
+  padding: 21px;
 }
 
 .weekday-hydration {
   grid-column: 1;
   margin: 1px;
   padding: 3px;
-  height: 4.3em;
+  height: 125px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -133,10 +156,6 @@ p {
   flex-flow: row nowrap;
 }
 
-.whole-week-sleep-data-display h4 {
-  margin: 0px;
-  padding: 0px;
-}
 
 .weekday-sleep-display,
 .weekday-sleep-labels,
@@ -158,21 +177,27 @@ p {
   background-color: #242F40;
 }
 
-.weekday-activity-labels{
+.weekday-activity-labels {
   width: 80px;
 }
 
-.weekday-sleep-labels h5 {
+.weekday-sleep-labels h5,
+.weekday-activity-labels h5 {
   padding: 8px;
   margin: 5px;
 }
 
-.day-activity-record h5{
+.day-activity-record h5,
+.daily-sleep h5 {
   margin: 3px;
   padding: 3px;
 }
-/* #363636 (Jet dark brown-black)
-242F40 (gunmetal-dark blue)
-CCA43B (satin sheen gold - yellow)
-E5E5E5 (platinum off grey white) */
+
+.friend {
+  background-color: #242F40;
+  border-radius: 10px;
+  color: #CCA43B;
+  padding: 8px;
+}
+
 
