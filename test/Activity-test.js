@@ -140,7 +140,7 @@ describe('Activity Class', () => {
   it('should calculate user\'s speed for given date', function() {
 
 
-    expect(userActivity.calculateSpeedForGivenDate('2019/06/17')).to.equal('On 2019/06/17 you walked 4.17 miles per hour!')
+    expect(userActivity.calculateSpeedForGivenDate('2019/06/17')).to.equal('4.17 mph')
   });
 });
 

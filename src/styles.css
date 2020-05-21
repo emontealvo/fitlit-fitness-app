@@ -67,8 +67,12 @@ article section {
 }
 
 .friend-list {
-  grid-row: 1 / span 3;
+  grid-row: 1 / span 4;
   grid-column: 4 / span 1;   
+}
+
+.friend-list h4 {
+  display: flex-start; 
 }
 
 p {
@@ -183,12 +187,17 @@ h4 {
   margin: 5px;
 }
 
-.day-activity-record h5{
+.day-activity-record h5,
+.daily-sleep h5 {
   margin: 3px;
   padding: 3px;
 }
-/* #363636 (Jet dark brown-black)
-242F40 (gunmetal-dark blue)
-CCA43B (satin sheen gold - yellow)
-E5E5E5 (platinum off grey white) */
+
+.friend {
+  background-color: #242F40;
+  border-radius: 10px;
+  color: #CCA43B;
+  padding: 8px;
+}
+
 

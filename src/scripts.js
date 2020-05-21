@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-console.log("Hello World");
 
 let user;
 const userRepository = new UserRepository(userData);
@@ -52,13 +51,12 @@ const displayUserFriends = () => {
   let foundFriend
   user.friends.forEach((friend) => {
     foundFriend = userRepository.findUser(friend)
-    let friendID = foundFriend.id
-    friendID = new Activity (foundFriend, activityData)
+    let friendID = new Activity (foundFriend, activityData)
     friendsSection.insertAdjacentHTML('beforeend',
     `<div class="friend">
       <p><span>Name:</span> ${foundFriend.name}</p>
       <p><span>Daily Step Goal:</span> ${foundFriend.dailyStepGoal}</p>
-      <p>${friendID.friendTotalStepsComparedToUser(user, activityData, friendID.date)}</p>
+      <h5>${friendID.friendTotalStepsComparedToUser(user, activityData, friendID.date)}</h5>
     </div>`)
   })
 }
@@ -110,21 +108,21 @@ const instantiateUserSleep = () => {
 }
 
 const displaySleepInformation = (sleepObject) => {
-  displayDailySleepInfo(sleepObject)
+  displaySleepInfo(sleepObject)
   displayWeeklySleepInfo(sleepObject)
-  //find a way to display the information below
-  let allTimeSleepQuality = sleepObject.calculateUserAvgSleepQuality()
-  let allTimeHoursSlept = sleepObject.calculateUserAvgHoursSlept()
 }
 
-const displayDailySleepInfo = (sleepObject) => {
-  let hoursSleptForDate = sleepObject.findHoursSlept(sleepObject.date)
-  let sleepQualityForDate = sleepObject.findSleepQuality(sleepObject.date)
+const displaySleepInfo = (sleepObject) => {
   const userDaySleepWidget = document.querySelector('.daily-sleep');
   userDaySleepWidget.innerHTML = 
-  `<h5> Daily Sleep: </h5>
-  <h5> Hours Slept: ${hoursSleptForDate}</h5>
-  <h5> Sleep Quality: ${sleepQualityForDate}</h5>`
+  `<h5> Hours Slept: </h5>
+  <h5>${sleepObject.findHoursSlept(sleepObject.date)}</h5>
+  <h5> Sleep Quality:</h5>
+  <h5>${sleepObject.findSleepQuality(sleepObject.date)}</h5>
+  <h5> Average Hours Slept:</h5>
+  <h5>${sleepObject.calculateUserAvgHoursSlept()}</h5>
+  <h5> Average Sleep Quality:</h5>
+  <h5>${sleepObject.calculateUserAvgSleepQuality()}</h5>`
 }
 
 const displayWeeklySleepInfo = (sleepObject) => {
@@ -148,7 +146,6 @@ const instantiateUserActivity = () => {
 
 const displayActivityInformation = (userActivity) => {
   displayUserActivity4Day(userActivity);
-  // displayUserActivityComparison(userActivity);
   displayUserActivity4Week(userActivity);
 }
 
