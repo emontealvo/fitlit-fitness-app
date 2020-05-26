@@ -9,8 +9,9 @@
 4. Testing for this application can be achieved by running `npm test` in your terminal, all dependencies for testing will already be installed.
 
 ## Collaborators:
-Edwin Montealvo
-Jeremiah Black
+- Edwin Montealvo
+- Jeremiah Black 
+https://github.com/jeremiahblackol
 
 ## Abstract:
 FitLit is a Mod 2 application for Turing students. 
